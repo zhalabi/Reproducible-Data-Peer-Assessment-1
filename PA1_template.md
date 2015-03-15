@@ -36,9 +36,9 @@ output:
       medianDay<-median(dtResultbyDay$Total)
 ```
 
-  Mean of the total number of steps taken per day: 10766.1887 
+  **Mean of the total number of steps taken per day: 10766.1887** 
   
-  Median of the total number of steps taken per day: 10765 
+  **Median of the total number of steps taken per day: 10765**
 
 
 ```r
@@ -54,15 +54,17 @@ output:
       max_interval <- dtResultbyInterval[which.max(dtResultbyInterval$steps),1]
 ```
 
-On average across all the days in the dataset, the 835th contains the maximum number of steps
+  **On average across all the days in the dataset, the 835th Interval contains the maximum number of steps**
 
+
+**Imputing missing values: The calculated mean per interval was used to impute missing values.**
 
 
 ```r
       dtActivity<-subset(Activity[,c("steps","interval")], is.na(Activity$steps)==F)
       incomplete <- sum(!complete.cases(Activity))
       dtImputed <- transform(Activity, steps = ifelse(is.na(Activity$steps), dtResultbyInterval$steps[match(Activity$interval, dtResultbyInterval$interval)], Activity$steps))
-      dtImputed[as.character(dtImputed$date) == "2012-10-01", 1] <- 0
+ 
       dtStepsbyDayImputed <- aggregate(steps ~ date, dtImputed, sum)
       hist(dtStepsbyDayImputed$steps, main = paste("Total Steps Each Day"), col="blue", xlab="Number of Steps")
       hist(dtResultbyDay$Total, main = paste("Total Steps Each Day"), col="red", xlab="Number of Steps", add=T)
@@ -79,23 +81,24 @@ On average across all the days in the dataset, the 835th contains the maximum nu
       totalDiff <- sum(dtResultbyDay$Total) - sum(dtStepsbyDayImputed$steps)
 ```
 
-  The total number of missing values in the dataset: 2304 
+
+The total number of missing values in the dataset: 2304 
   
   The mean of total number of steps taken per day: 10766.1887 
   
   The median of total number of steps taken per day: 10765 
   
-  The mean of total number of steps taken per day (Imputing Estimates): 10589.6938 
+  The mean of total number of steps taken per day (Imputing Estimates): 10766.1887 
   
   The median of total number of steps taken per day (Imputing Estimates): 10766.1887 
   
-  The mean of the difference between real vs. estimate: 176.4949 
+  The mean of the difference between real vs. estimate: 0 
   
   The median of the difference between real vs. estimate: -1.1887 
   
-  The total of the difference between real vs. estimate: -75363.3208 
+  The total of the difference between real vs. estimate: -86129.5094 
 
-  Based on the summary results and the histogram listed above, the estimated median is very close to the median of the original dataset in which the missing values were ignored. However, the mean value differs slighltly.
+**Based on the summary results and the histogram listed above, the estimated median is very close to the median of the original dataset in which the missing values were ignored. Since the mean was used to impute missing values the results was very accurate.**
 
 
 
@@ -110,10 +113,6 @@ On average across all the days in the dataset, the 835th contains the maximum nu
 
 ![plot of chunk differences in activity patterns between weekdays and weekends ](figure/differences in activity patterns between weekdays and weekends .png) 
 
-Generally, activities start and stop earlier during weekdays.
-
-On Weekends, activity is less during the early morning hours but there are more activity during the day on average.  
-
-On weekdays, activity is far less after (8pm) but there is surge of activities after (8pm) on weekends.
+**Generally, activities start and stop earlier during weekdays. On Weekends, activity is less during the early morning hours but there are more activity during the day on average. On weekdays, activity is far less after (8pm) but there is surge of activities after (8pm) on weekends.**
 
 

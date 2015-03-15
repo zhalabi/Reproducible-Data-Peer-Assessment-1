@@ -30,9 +30,9 @@ output:
       medianDay<-median(dtResultbyDay$Total)
 ```
 
-  Mean of the total number of steps taken per day: `r meanDay` 
+  **Mean of the total number of steps taken per day: `r meanDay`** 
   
-  Median of the total number of steps taken per day: `r medianDay` 
+  **Median of the total number of steps taken per day: `r medianDay`**
 
 ```{r Average daily activity pattern, echo=TRUE}
       dtActivity<-subset(Activity[,c("steps","interval")], is.na(Activity$steps)==F)
@@ -42,14 +42,16 @@ output:
       max_interval <- dtResultbyInterval[which.max(dtResultbyInterval$steps),1]
 ``` 
 
-On average across all the days in the dataset, the `r max_interval`th contains the maximum number of steps
+  **On average across all the days in the dataset, the `r max_interval`th Interval contains the maximum number of steps**
 
+
+**Imputing missing values: The calculated mean per interval was used to impute missing values.**
 
 ```{r Imputing missing values , echo=TRUE}
       dtActivity<-subset(Activity[,c("steps","interval")], is.na(Activity$steps)==F)
       incomplete <- sum(!complete.cases(Activity))
       dtImputed <- transform(Activity, steps = ifelse(is.na(Activity$steps), dtResultbyInterval$steps[match(Activity$interval, dtResultbyInterval$interval)], Activity$steps))
-      dtImputed[as.character(dtImputed$date) == "2012-10-01", 1] <- 0
+ 
       dtStepsbyDayImputed <- aggregate(steps ~ date, dtImputed, sum)
       hist(dtStepsbyDayImputed$steps, main = paste("Total Steps Each Day"), col="blue", xlab="Number of Steps")
       hist(dtResultbyDay$Total, main = paste("Total Steps Each Day"), col="red", xlab="Number of Steps", add=T)
@@ -62,7 +64,8 @@ On average across all the days in the dataset, the `r max_interval`th contains t
       totalDiff <- sum(dtResultbyDay$Total) - sum(dtStepsbyDayImputed$steps)
 ```
 
-  The total number of missing values in the dataset: `r incomplete` 
+
+The total number of missing values in the dataset: `r incomplete` 
   
   The mean of total number of steps taken per day: `r meanDay` 
   
@@ -78,7 +81,7 @@ On average across all the days in the dataset, the `r max_interval`th contains t
   
   The total of the difference between real vs. estimate: `r totalDiff` 
 
-  Based on the summary results and the histogram listed above, the estimated median is very close to the median of the original dataset in which the missing values were ignored. However, the mean value differs slighltly.
+**Based on the summary results and the histogram listed above, the estimated median is very close to the median of the original dataset in which the missing values were ignored. Since the mean was used to impute missing values the results was very accurate.**
 
 
 
@@ -91,10 +94,6 @@ On average across all the days in the dataset, the `r max_interval`th contains t
       xyplot(steps_by_interval_i$steps ~ steps_by_interval_i$intv|steps_by_interval_i$dayow, main="Average Steps per Day by Interval",xlab="Intervals", ylab="Steps",layout=c(1,2), type="l")
 ```
 
-Generally, activities start and stop earlier during weekdays.
-
-On Weekends, activity is less during the early morning hours but there are more activity during the day on average.  
-
-On weekdays, activity is far less after (8pm) but there is surge of activities after (8pm) on weekends.
+**Generally, activities start and stop earlier during weekdays. On Weekends, activity is less during the early morning hours but there are more activity during the day on average. On weekdays, activity is far less after (8pm) but there is surge of activities after (8pm) on weekends.**
 
 
