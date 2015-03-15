@@ -1,9 +1,10 @@
 ---
-title: "RepData_Assignment1"
+title: "Reproducible Data Assignment1"
 author: "ZH"
 date: "Friday, March 13, 2015"
-output:
+output: 
   html_document:
+    keep_md: yes
     toc: yes
 ---
 
@@ -94,7 +95,7 @@ On average across all the days in the dataset, the 835th contains the maximum nu
   
   The total of the difference between real vs. estimate: -75363.3208 
 
-  Based on the summary results and the hostogram listed above, the estimated median is very close to the median of the original dataset in which the missing values were ignored. However, the mean value is differs slighltly.
+  Based on the summary results and the histogram listed above, the estimated median is very close to the median of the original dataset in which the missing values were ignored. However, the mean value differs slighltly.
 
 
 
@@ -113,6 +114,6 @@ Generally, activities start and stop earlier during weekdays.
 
 On Weekends, activity is less during the early morning hours but there are more activity during the day on average.  
 
-On weekdays, activity is far less by 20:00 (8pm) but there is surge of activities after 20:00 (8pm) on weekends.
+On weekdays, activity is far less after (8pm) but there is surge of activities after (8pm) on weekends.
 
 
