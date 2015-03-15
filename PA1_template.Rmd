@@ -1,8 +1,8 @@
 ---
-title: "RepData_Assignment1"
+title: "Reproducible Data Assignment1"
 author: "ZH"
 date: "Friday, March 13, 2015"
-output:
+output: 
   html_document:
     keep_md: yes
     toc: yes
@@ -21,8 +21,6 @@ output:
 
 ```{r Steps Taken per Day, echo=TRUE}
    
-
-
       dtActivity<-subset(Activity[,1:2], is.na(Activity$steps)==F)
       dtResultbyDay<-aggregate(dtActivity[,1] , by=list(StepDate=dtActivity[,2]),sum)
       colnames(dtResultbyDay)<-c("Date", "Total") 
@@ -80,7 +78,7 @@ On average across all the days in the dataset, the `r max_interval`th contains t
   
   The total of the difference between real vs. estimate: `r totalDiff` 
 
-  Based on the summary results and the hostogram listed above, the estimated median is very close to the median of the original dataset in which the missing values were ignored. However, the mean value is differs slighltly.
+  Based on the summary results and the histogram listed above, the estimated median is very close to the median of the original dataset in which the missing values were ignored. However, the mean value is differs slighltly.
 
 
 
@@ -97,6 +95,6 @@ Generally, activities start and stop earlier during weekdays.
 
 On Weekends, activity is less during the early morning hours but there are more activity during the day on average.  
 
-On weekdays, activity is far less by 20:00 (8pm) but there is surge of activities after 20:00 (8pm) on weekends.
+On weekdays, activity is far less after (8pm) but there is surge of activities after (8pm) on weekends.
 
 
